@@ -18,7 +18,7 @@ class markovBot
     {
         $dictionary = null;
 
-        $explode = preg_split('/[\s]+/', $text);
+        $explode = preg_split("/\s+/", $text);
 
         /*
          * Main loop. This loop will construct the dictionary.
@@ -52,7 +52,7 @@ class markovBot
 
             $text .= ' ' . $next;
 
-            $lastBlock = $next;
+            $lastBlock = explode(' ', $lastBlock)[1] . ' ' . $next;
         }
 
         return $text;
