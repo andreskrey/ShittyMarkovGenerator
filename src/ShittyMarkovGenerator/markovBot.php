@@ -42,9 +42,14 @@ class markovBot
         return $dictionary;
     }
 
-    public function makeChain($chainSize = 10)
+    public function makeChain($chainSize = 10, $theme = null)
     {
-        $lastBlock = array_rand($this->dictionary);
+        if ($theme) {
+            $lastBlock = $this->getTheme($theme);
+        } else {
+            $lastBlock = array_rand($this->dictionary);
+        }
+
         $text = $lastBlock;
 
         for ($i = 0; $i < $chainSize; $i++) {
@@ -87,8 +92,11 @@ class markovBot
 
     private function selectNextBlock($match)
     {
-        $chances = $this->createChances($match);
-
+        if (count($match) > 1) {
+            $chances = $this->createChances($match);
+        } else {
+            return array_keys($match)[0];
+        }
         $random = mt_rand(1, $chances['total']);
 
         foreach ($chances['chances'] as $k => $i) {
@@ -114,6 +122,12 @@ class markovBot
             'chances' => $chances,
             'total' => $bottom - 1
         ];
+    }
+
+    private function getTheme($theme)
+    {
+        $search = preg_grep('/\b' . $theme . '/', array_keys($this->dictionary));
+        return $search[array_rand($search)];
     }
 
 }
