@@ -48,7 +48,9 @@ class markovBot
         $text = $lastBlock;
 
         for ($i = 0; $i < $chainSize; $i++) {
-            $next = $this->findMatch($lastBlock);
+            $endSentence = false;
+            if ($i == $chainSize - 1) $endSentence = true;
+            $next = $this->findMatch($lastBlock, $endSentence);
 
             $text .= ' ' . $next;
 
@@ -58,13 +60,26 @@ class markovBot
         return $text;
     }
 
-    private function findMatch($lastBlock)
+    private function findMatch($lastBlock, $endSentence = false)
     {
-        if (isset($this->dictionary[$lastBlock])) {
-            $match = $this->dictionary[$lastBlock];
+        if ($endSentence) {
+            $explode = explode(' ', $lastBlock);
+            $lastWord = end($explode);
+            $endings = preg_grep("/" . $lastWord . " .+([.!?,;:]$)/", array_keys($this->dictionary));
+
+            if ($endings) {
+                return substr($endings[array_rand($endings)], strlen($lastWord) + 1);
+            } else {
+                $match = $this->dictionary[array_rand($this->dictionary)];
+            }
         } else {
-            $match = $this->dictionary[array_rand($this->dictionary)];
+            if (isset($this->dictionary[$lastBlock])) {
+                $match = $this->dictionary[$lastBlock];
+            } else {
+                $match = $this->dictionary[array_rand($this->dictionary)];
+            }
         }
+
         $block = $this->selectNextBlock($match);
 
         return $block;

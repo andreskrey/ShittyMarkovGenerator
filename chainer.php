@@ -25,4 +25,4 @@ if (!is_readable($opts['r'])) {
 
 $chainer = new ShittyMarkovGenerator\markovBot($text, (isset($opts['n'])) ? $opts['n'] : 2);
 
-echo $chainer->makeChain(isset($opts['l']) ? $opts['l'] : 10);
+echo utf8_decode($chainer->makeChain(isset($opts['l']) ? $opts['l'] : 10));
