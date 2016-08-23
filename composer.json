@@ -1,0 +1,18 @@
+{
+  "name": "andreskrey/ShittyMarkovGenerator",
+  "description": "A shitty implementation to generate Markov chains to create incoherent phrases.",
+  "keywords": [
+    "markov"
+  ],
+  "homepage": "https://github.com/andreskrey/ShittyMarkovGenerator",
+  "authors": [
+    {
+      "name": "Andres Rey"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "": "src/"
+    }
+  }
+}
