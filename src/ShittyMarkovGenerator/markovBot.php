@@ -46,7 +46,7 @@ class markovBot
          */
         for ($i = 0; $i < (count($explode) - $blockSize); $i++) {
             // Making the key using n words
-            $key = $explode[$i] . ' ' . $explode[$i + $blockSize - 1];
+            $key = implode(' ', array_slice($explode, $i, $blockSize));
 
             // Selecting the following word
             $next = $explode[$i + $blockSize];
@@ -137,6 +137,9 @@ class markovBot
         }
 
         $block = $this->selectNextBlock($match);
+
+        // Deleting the selected block in order to avoid repeating it in the next loop
+        unset($this->dictionary[$lastBlock][$block]);
 
         return $block;
     }
