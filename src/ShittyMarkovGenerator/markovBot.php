@@ -208,6 +208,9 @@ class markovBot
     private function getTheme($theme)
     {
         $search = preg_grep('/\b' . $theme . '/', array_keys($this->dictionary));
+
+        if (!$search) return $this->dictionary[array_rand($this->dictionary)];
+
         return $search[array_rand($search)];
     }
 }
