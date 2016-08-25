@@ -50,4 +50,4 @@ of the way the dictionary is generated, similar combinations are still present o
 
 ### Acknowledgements
 
-This project is heavily based on the [markov-php](https://github.com/heidilabs/markov-php/) by [heidilabs](https://github.com/heidilabs).
+This project is heavily based on the [markov-php](https://github.com/heidilabs/markov-php/) project by [heidilabs](https://github.com/heidilabs).
