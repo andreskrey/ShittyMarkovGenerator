@@ -1,5 +1,5 @@
 {
-  "name": "andreskrey/ShittyMarkovGenerator",
+  "name": "andreskrey/shitty-markov-generator",
   "description": "A shitty implementation to generate Markov chains to create incoherent phrases.",
   "keywords": [
     "markov"
